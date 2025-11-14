@@ -18,6 +18,8 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import com.negocio.affectakey.ui.theme.AffectaKeyTheme
+import android.view.ViewGroup
 
 class AffectaKeyService : InputMethodService(),
     SavedStateRegistryOwner,
@@ -58,9 +60,13 @@ class AffectaKeyService : InputMethodService(),
             setViewTreeLifecycleOwner(this@AffectaKeyService)
             setViewTreeViewModelStoreOwner(this@AffectaKeyService)
             setViewTreeSavedStateRegistryOwner(this@AffectaKeyService)
+            layoutParams = ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, // Ancho: Ocupar toda la pantalla
+                ViewGroup.LayoutParams.WRAP_CONTENT  // Alto: Ajustarse al contenido (nuestras 4 filas)
+            )
 
             setContent {
-                MaterialTheme {
+                AffectaKeyTheme {
                     KeyboardScreen(viewModel = viewModel)
                 }
             }
